@@ -1,0 +1,48 @@
+package carsapp;
+
+public class Car {
+    private int id;
+    private String make;
+    private String model;
+    private String bodyType;
+    private int year;
+    private double price;
+    private String fuelType;
+    private String transmission;
+    private String drivetrain;
+    private int horsepower;
+    private int safetyRating;
+    private int seatingCapacity;
+    private String imageUrl;
+    private double matchScore;
+    
+    // Getters and Setters for all fields...
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+    public String getMake() { return make; }
+    public void setMake(String make) { this.make = make; }
+    public String getModel() { return model; }
+    public void setModel(String model) { this.model = model; }
+    public String getBodyType() { return bodyType; }
+    public void setBodyType(String bodyType) { this.bodyType = bodyType; }
+    public int getYear() { return year; }
+    public void setYear(int year) { this.year = year; }
+    public double getPrice() { return price; }
+    public void setPrice(double price) { this.price = price; }
+    public String getFuelType() { return fuelType; }
+    public void setFuelType(String fuelType) { this.fuelType = fuelType; }
+    public String getTransmission() { return transmission; }
+    public void setTransmission(String transmission) { this.transmission = transmission; }
+    public String getDrivetrain() { return drivetrain; }
+    public void setDrivetrain(String drivetrain) { this.drivetrain = drivetrain; }
+    public int getHorsepower() { return horsepower; }
+    public void setHorsepower(int horsepower) { this.horsepower = horsepower; }
+    public int getSafetyRating() { return safetyRating; }
+    public void setSafetyRating(int safetyRating) { this.safetyRating = safetyRating; }
+    public int getSeatingCapacity() { return seatingCapacity; }
+    public void setSeatingCapacity(int seatingCapacity) { this.seatingCapacity = seatingCapacity; }
+    public String getImageUrl() { return imageUrl; }
+    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+    public double getMatchScore() { return matchScore; }
+    public void setMatchScore(double matchScore) { this.matchScore = matchScore; }
+}
