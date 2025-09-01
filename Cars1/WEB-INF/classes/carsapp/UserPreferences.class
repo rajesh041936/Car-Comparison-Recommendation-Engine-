@@ -1,0 +1,18 @@
+package carsapp;
+
+public class UserPreferences {
+    private double maxPrice;
+    private String fuelType;
+    private String bodyType; // "Any", "Sedan", "SUV", etc.
+    private int minSeats;
+    
+    // Getters and Setters for all fields...
+    public double getMaxPrice() { return maxPrice; }
+    public void setMaxPrice(double maxPrice) { this.maxPrice = maxPrice; }
+    public String getFuelType() { return fuelType; }
+    public void setFuelType(String fuelType) { this.fuelType = fuelType; }
+    public String getBodyType() { return bodyType; }
+    public void setBodyType(String bodyType) { this.bodyType = bodyType; }
+    public int getMinSeats() { return minSeats; }
+    public void setMinSeats(int minSeats) { this.minSeats = minSeats; }
+}
