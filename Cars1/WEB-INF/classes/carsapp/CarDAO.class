@@ -1,0 +1,36 @@
+package carsapp;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CarDAO {
+    public List<Car> getAllCars() {
+        List<Car> cars = new ArrayList<>();
+        String sql = "SELECT * FROM cars";
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                Car car = new Car();
+                car.setId(rs.getInt("id"));
+                car.setMake(rs.getString("make"));
+                car.setModel(rs.getString("model"));
+                car.setBodyType(rs.getString("body_type"));
+                car.setYear(rs.getInt("year"));
+                car.setPrice(rs.getDouble("price"));
+                car.setFuelType(rs.getString("fuel_type"));
+                car.setTransmission(rs.getString("transmission"));
+                car.setDrivetrain(rs.getString("drivetrain"));
+                car.setHorsepower(rs.getInt("horsepower"));
+                car.setSafetyRating(rs.getInt("safety_rating"));
+                car.setSeatingCapacity(rs.getInt("seating_capacity"));
+                car.setImageUrl(rs.getString("image_url"));
+                cars.add(car);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cars;
+    }
+}
