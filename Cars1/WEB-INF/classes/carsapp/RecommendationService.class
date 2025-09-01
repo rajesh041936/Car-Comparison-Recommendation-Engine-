@@ -1,0 +1,48 @@
+package carsapp;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class RecommendationService {
+    private final CarDAO carDAO = new CarDAO();
+
+    public List<Car> getRecommendations(UserPreferences prefs) {
+        List<Car> allCars = carDAO.getAllCars();
+
+        allCars.forEach(car -> car.setMatchScore(calculateMatchScore(car, prefs)));
+
+        // Sort by score and then limit to the top 5 results
+        return allCars.stream()
+                .sorted(Comparator.comparingDouble(Car::getMatchScore).reversed())
+                .limit(5)
+                .collect(Collectors.toList());
+    }
+
+    private double calculateMatchScore(Car car, UserPreferences prefs) {
+        double score = 100.0; // Start with a perfect score and deduct points
+
+        // Price Penalty: Heavy penalty for being over budget
+        if (car.getPrice() > prefs.getMaxPrice()) {
+            double diff = car.getPrice() - prefs.getMaxPrice();
+            score -= (diff / 500); // 1 point deducted for every $500 over
+        }
+
+        // Fuel Type Mismatch: -30 points
+        if (!prefs.getFuelType().equals("Any") && !car.getFuelType().equalsIgnoreCase(prefs.getFuelType())) {
+            score -= 30;
+        }
+
+        // Body Type Mismatch: -30 points
+        if (!prefs.getBodyType().equals("Any") && !car.getBodyType().equalsIgnoreCase(prefs.getBodyType())) {
+            score -= 30;
+        }
+
+        // Seating Capacity: Heavy penalty for not meeting minimum
+        if (car.getSeatingCapacity() < prefs.getMinSeats()) {
+            score -= 40;
+        }
+        
+        return Math.max(0, score); // Score cannot be negative
+    }
+}
