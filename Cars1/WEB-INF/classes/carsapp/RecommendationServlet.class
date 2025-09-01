@@ -1,0 +1,27 @@
+package carsapp;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
+
+@WebServlet("/recommend")
+public class RecommendationServlet extends HttpServlet {
+    private final RecommendationService recommendationService = new RecommendationService();
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        UserPreferences prefs = new UserPreferences();
+        prefs.setMaxPrice(Double.parseDouble(request.getParameter("maxPrice")));
+        prefs.setFuelType(request.getParameter("fuelType"));
+        prefs.setBodyType(request.getParameter("bodyType"));
+        prefs.setMinSeats(Integer.parseInt(request.getParameter("minSeats")));
+
+        List<Car> recommendedCars = recommendationService.getRecommendations(prefs);
+        request.setAttribute("recommendedCars", recommendedCars);
+        request.getRequestDispatcher("/results.jsp").forward(request, response);
+    }
+}
